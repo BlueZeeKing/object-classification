@@ -12,7 +12,7 @@ async function getItem() {
 
   const item = await collection.findOneAndUpdate(
     { done: false },
-    { $set: { done: false } } // TODO: change for prod
+    { $set: { done: true } }
   );
 
   return item.value;
@@ -26,7 +26,7 @@ export interface Image {
 export default async function Home() {
   let raw_data = await getItem();
 
-  const data = JSON.stringify(raw_data, ["name", "size"]) as unknown as Image;
+  const data = JSON.parse(JSON.stringify(raw_data, ["name", "size"])) as Image;
 
   return (
     <main>

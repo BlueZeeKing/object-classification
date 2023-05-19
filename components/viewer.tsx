@@ -21,7 +21,7 @@ export default function Viewer(props: { image: Image }) {
   const [mousedown, setMousedown] = useState(false);
   const [mousedownResize, setMousedownResize] = useState(false);
 
-  const submit = useCallback(() => {
+  const submit = useCallback(async () => {
     const scaleFactors = [
       props.image.size[0] / window.innerWidth,
       props.image.size[1] / window.innerHeight,
@@ -29,7 +29,7 @@ export default function Viewer(props: { image: Image }) {
 
     const scaleFactor = Math.max(scaleFactors[0], scaleFactors[1]);
 
-    fetch("/submitData", {
+    await fetch("/submitData", {
       method: "POST",
       body: JSON.stringify({
         data: {
@@ -41,6 +41,8 @@ export default function Viewer(props: { image: Image }) {
         name: props.image.name,
       }),
     });
+
+    location.reload();
   }, [
     props.image.name,
     props.image.size,
@@ -98,7 +100,7 @@ export default function Viewer(props: { image: Image }) {
       style={{ backgroundImage: `url("/${props.image.name}")` }}
     >
       <div
-        className="cursor-grab active:cursor-grabbing bg-zinc-400 bg-opacity-50 border-black absolute"
+        className="cursor-grab active:cursor-grabbing bg-zinc-400 bg-opacity-50 border-black absolute border-4"
         style={{
           width: `${state.width}px`,
           height: `${state.height}px`,
