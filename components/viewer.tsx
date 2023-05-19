@@ -97,7 +97,12 @@ export default function Viewer(props: { image: Image }) {
   return (
     <div
       className="h-[100dvh] w-[100dvw] bg-contain bg-no-repeat"
-      style={{ backgroundImage: `url("/${props.image.name}")` }}
+      style={{
+        backgroundImage: `url("/${props.image.name.replace(
+          ".JPEG",
+          ".webp"
+        )}")`,
+      }}
     >
       <div
         className="cursor-grab active:cursor-grabbing bg-zinc-400 bg-opacity-50 border-black absolute border-4"
