@@ -99,7 +99,7 @@ export default function Viewer(props: { image: Image }) {
       className="h-[100dvh] w-[100dvw] bg-contain bg-no-repeat"
       style={{
         backgroundImage: `url("/${props.image.name.replace(
-          ".JPEG",
+          ".jpeg",
           ".webp"
         )}")`,
       }}
