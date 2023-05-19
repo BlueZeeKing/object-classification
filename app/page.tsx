@@ -1,7 +1,9 @@
 import Viewer from "@/components/viewer";
 import { MongoClient } from "mongodb";
+import { headers } from "next/headers";
 
 async function getItem() {
+  const headers_val = headers();
   const client = new MongoClient(process.env.MONGODB_URI as string);
 
   await client.connect();
